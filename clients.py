@@ -22,7 +22,7 @@ class Client(object):
             if (ag.sellToCLient(choice[0], choice[1])):
                 # Travel
                 sleep(10)
-                return True
+                return choice
             else:
                 sleep(0.01)
                 self.buy(ag)
