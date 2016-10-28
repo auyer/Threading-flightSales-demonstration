@@ -1,12 +1,12 @@
-import company as cp
-from threading import Lock, Thread
+from company import Company
+from threading import RLock, Thread
 from time import sleep
 
 class Agency(object):
 
-    def __init__(self, companies: [cp.Company], varName:str ):
+    def __init__(self, companies: [Company], varName:str ):
         global agLock
-        agLock = Lock()
+        agLock = RLock()
         agLock.acquire()
         self.name = varName
         self.companyList = companies
@@ -15,29 +15,33 @@ class Agency(object):
         agLock.release()
 
     def update(self):
+        try:
+            global agLock
+            agLock.acquire()
+            #print('Starting update ' + self.name)
+            self.avSeats.clear()
+            for comp in self.companyList:
+                companySeats = comp.getAvailableSeats()
+                for seat in companySeats:
+                    self.avSeats.append((comp , seat.number , comp.getCurrentPrice()))
+            #print('-Update'+'\a') # Sound ALert
+            agLock.release()
+        except:
+            print('Exeption Caught in Update ' + self.name)
+            agLock.release()
+
+    def autoUpdate(self):
         while(True):
-            try:
-                global agLock
-                agLock.acquire()
-                #print('Starting update ' + self.name)
-                self.avSeats.clear()
-                print(self.name + ' updating')
-                for comp in self.companyList:
-                    companySeats = comp.getAvaiableSeats()
-                    for seat in companySeats:
-                        self.avSeats.append((comp , companySeats.index(seat) , comp.getCurrentPrice()))
-                agLock.release()
-                sleep(2)
-            except:
-                print('Exeption Caught in Update' + self.name)
-                agLock.release()
-                sleep(5)
+            sleep(5)
+            if not (self.update()):
+                sleep(0.1)
+                self.update()
 
     def initData(self):
         self.avSeats.clear()
         for comp in self.companyList:
             for seat in comp.seats:
-                self.avSeats.append((comp, comp.seats.index(seat), comp.getCurrentPrice()))
+                self.avSeats.append((comp, seat.number, comp.getCurrentPrice()))
 
     def getList(self):
         global agLock
@@ -48,24 +52,29 @@ class Agency(object):
 
     def run(self):
         print('Starting run ' + self.name)
-        tr = Thread(target= self.update)
-        tr.start()
+        Thread(target= self.autoUpdate).start()
+
         return True
 
-    def sellToCLient(self, comp: cp.Company, seat: int):
-        print('\nTrying to sell')
-        global agLock
-        agLock.acquire()
-        print('\nSelling')
-        for c , s in self.avSeats:
-            if c == comp & s == seat:
-                yield c, s
+    def sellToCLient(self, comp: Company, seat: int):
+        #print('\nTrying to sell')
+        #global agLock
+        #agLock.acquire()
+        #print('\nSelling')
+        for desiredCompany , desiredSeat, v  in self.avSeats:
+            if desiredCompany == comp and desiredSeat == seat:
                 break
         try:
-            agLock.release()
-            print('\nSOLD')
-            return comp.sellSeat(s)
+            if(desiredCompany.sellSeat(desiredSeat)):
+                print('\n', self.name, ' SOLD:' ,  desiredCompany, 'seat', desiredSeat)
+        #        agLock.release()
+                self.update()
+                return True
+            else:
+                print('\n', self.name,' Failed to sell:',  desiredCompany,'seat', desiredSeat, ' (Sold Already)')
+       #         agLock.release()
+                return False
         except:
-            print('\n Failed to sell')
-            agLock.release()
+            print('Exeption Caught in sellToClient ' + self.name)
+        #    agLock.release()
             return False

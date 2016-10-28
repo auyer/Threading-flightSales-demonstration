@@ -1,5 +1,18 @@
 from random import randrange
 from threading import Lock
+from time import sleep
+
+class Seat(object):
+
+    def __init__(self, index:int):
+        self.number = index
+        self.available = True
+
+    def __str__(self):
+        return str(self.number)
+
+    def __int__(self):
+        return self.number
 
 class Company(object):
     def __init__(self, varName: str):
@@ -8,8 +21,11 @@ class Company(object):
         cpLock.acquire()
         self.name = varName
         self.baseSeatAmt = 5
-        self.amtAvaiableSeats = 5
-        self.seats = [False] * self.baseSeatAmt
+        self.amtAvailableSeats = 0
+        self.seats = []
+        for i in range(self.baseSeatAmt):
+            self.seats.append(Seat(i))
+            self.amtAvailableSeats+=1
         self.dispenses = 1000.00
         self.basePrice = 250.00
         self.currentPrice = self.basePrice + randrange(0,50,2)
@@ -27,15 +43,16 @@ class Company(object):
         cpLock.release()
         return price
 
-    def getAvaiableSeats(self):
+    def getAvailableSeats(self):
         global cpLock
         cpLock.acquire()
         #print('cpLock aquired in ' + self.name)
         list = []
-        if not self.amtAvaiableSeats == 0:
+        if self.amtAvailableSeats > 0:
             for seat in self.seats:
-                if seat == False:
-                    list.append(self.seats.index(seat))
+                if seat.available:
+                    #print(seat)
+                    list.append(seat)
             cpLock.release()
             return list
         else:
@@ -45,19 +62,31 @@ class Company(object):
     def sellSeat(self, seatNum):
         global cpLock
         cpLock.acquire()
-        if self.seats[seatNum] == True:
-            cpLock.release()
-            return False
-        else:
-            self.seats[seatNum] = True
-            self.amtAvaiableSeats -=  1
+        if self.seats[seatNum].available :
+            self.seats[seatNum].available = False
+            self.amtAvailableSeats -=  1
+            self.priceIncrease()
             cpLock.release()
             return True
+        else: #second try
+            sleep(1)
+            if self.seats[seatNum].available :
+                self.seats[seatNum].avaiable = False
+                self.amtAvailableSeats -= 1
+                self.priceIncrease()
+                cpLock.release()
+                return True
+            else:
+                cpLock.release()
+                return False
+
+    def priceIncrease(self):
+        self.currentPrice += self.currentPrice * 0.1
 
     def manager(self):
         global cpLock
         cpLock.acquire()
-        if  not self.amtAvaiableSeats  == self.baseSeatAmt:
-            for i in range(self.amtAvaiableSeats):
-                self.currentPrice += self.currentPrice * 0.1
+        if  not self.amtAvailableSeats  == self.baseSeatAmt:
+            for i in range(self.amtAvailableSeats):
+                self.priceIncrease()
         cpLock.release()
