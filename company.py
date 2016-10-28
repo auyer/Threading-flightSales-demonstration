@@ -3,11 +3,11 @@ from random import randrange
 class Company(object):
     def __init__(self, varName: str):
         self.name = varName
-        self.sAmt = 5
+        self.baseSeatAmt = 5
         self.amtAvaiableSeats = 5
-        self.seats = [False] * self.sAmt
+        self.seats = [False] * self.baseSeatAmt
         self.dispenses = 1000.00
-        self.basePrice = 250
+        self.basePrice = 250.00s
         self.currentPrice = self.basePrice + randrange(0,50,2)
         self.currentRevenue = 0
         self.minimumRevenue = self.dispenses + self.dispenses*0.5
@@ -37,6 +37,6 @@ class Company(object):
             return True
 
     def manager(self):
-        if  not self.amtAvaiableSeats  == self.sAmt:
+        if  not self.amtAvaiableSeats  == self.baseSeatAmt:
             for i in range(self.amtAvaiableSeats):
                 self.currentPrice += self.currentPrice * 0.1

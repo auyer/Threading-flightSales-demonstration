@@ -27,7 +27,7 @@ class Agency(object):
                 sleep(2)
             except:
                 sleep(5)
-
+gi
     def initData(self):
         self.avSeats.clear()
         for comp in self.companyList:
