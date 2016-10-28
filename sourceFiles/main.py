@@ -1,9 +1,10 @@
 from threading import RLock, Thread
 from time import sleep
 
-from agency import Agency
-from clients import Client
-from company import Company
+from travelAgencies.agency import Agency
+from travelAgencies.company import Company
+
+from travelAgencies.client import Client
 
 if __name__ == "__main__":
 

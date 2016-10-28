@@ -1,10 +1,10 @@
 from threading import RLock, Thread
 from time import sleep
 
-from company import Company
+from travelAgencies.company import Company
+
 
 class Agency(object):
-
     def __init__(self, companies: [Company], varName:str ):
         global agLock
         agLock = RLock()

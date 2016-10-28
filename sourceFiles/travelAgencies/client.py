@@ -2,11 +2,10 @@ from random import randrange
 from threading import currentThread
 from time import sleep
 
-from agency import Agency
+from travelAgencies.agency import Agency
 
 
 class Client(object):
-
     def __init__(self, knownAgencies: [Agency]):
         self.agencies = knownAgencies
         self.agencyChosen = self.agencies[randrange(0,self.agencies.__len__())]

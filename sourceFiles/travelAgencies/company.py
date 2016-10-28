@@ -3,7 +3,6 @@ from threading import RLock
 from time import sleep
 
 class Seat(object):
-
     def __init__(self, index:int):
         self.number = index
         self.available = True
