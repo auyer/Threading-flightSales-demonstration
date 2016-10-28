@@ -5,7 +5,7 @@ An educational Python demonstration of threading and Mutex usage in a ticket sel
 
 #The problem
 
-This system simulates sales of Air Plane Tickets. In this simulation, there are:
+This system simulates sales of Airplane Tickets. In this simulation, there are:
 - 4 companies that fly the same route, with the same plane and the same amount of seats.
 - 2 Flight Agencies that sell the tickets to the clients
 - a certain amount of clients
@@ -13,17 +13,17 @@ This system simulates sales of Air Plane Tickets. In this simulation, there are:
 ### Flight Company
 Each flight company has:
 - 5 seats per plane
-- a total dispenses of 1000.00 'coins'
-- a Crazy manager that increases the price of the ticket in 10% for each ticket sold.
+- a total per flight cost of 1000.00 'coins'  
+- a crazy manager that increases the price of the ticket in 10% incerements for each ticket sold.
 - the company has to make sure not to sell the same ticket to two different agencies
 
 ### Travel Agency
 Each agency has to:
-- show the client every seat available to buy. Info: price, company and number
+- show to the client every seat available to buy. Info: price, company and number
 - make sure not to sell the same ticket to two different clients
 
 ### Client
-Every client follow this rules:
+Every client follow these rules:
 - He will buy only one ticket
 - He will always buy the cheapest flight available. 
 
