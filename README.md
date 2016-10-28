@@ -28,9 +28,8 @@ Every client follow this rules:
 - He will always buy the cheapest flight available. 
 
 
-
-
 #The Model ( ER and UML )
+(the ER also presents some unimplemented features described below ["Next Features"](https://github.com/auyer/TravelAgencies___a_threading-Mutex_Demonstration#next-features-) ) 
 
 ![ModelScreenShot](https://github.com/auyer/Threading-flightSales-demonstration/blob/master/models.draw_io/ModelScreenShot.png?raw=true "Model ScreenShot")
 
