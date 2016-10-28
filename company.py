@@ -1,5 +1,5 @@
 from random import randrange
-from threading import Lock
+from threading import RLock
 from time import sleep
 
 class Seat(object):
@@ -17,7 +17,7 @@ class Seat(object):
 class Company(object):
     def __init__(self, varName: str):
         global cpLock
-        cpLock = Lock()
+        cpLock = RLock()
         cpLock.acquire()
         self.name = varName
         self.baseSeatAmt = 5

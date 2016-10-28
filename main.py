@@ -1,13 +1,13 @@
-import company as cp
-import agency as ag
-from clients import Client
-#import clients as cl
-import threading as th
+from threading import RLock, Thread
 from time import sleep
+
+from agency import Agency
+from clients import Client
+from company import Company
 
 if __name__ == "__main__":
 
-    lock = th.Lock()
+    lock = RLock()
     lock.acquire()
     lock.release()
 
@@ -19,16 +19,16 @@ if __name__ == "__main__":
 
     #Flight Companies
 
-    latam = cp.Company('LATAM')
-    ryanair = cp.Company('Ryanair')
-    airFrance = cp.Company('AirFrance')
-    panAm = cp.Company('PanAm')
+    latam = Company('LATAM')
+    ryanair = Company('Ryanair')
+    airFrance = Company('AirFrance')
+    panAm = Company('PanAm')
 
     companyList = [latam,ryanair,airFrance,panAm]
 
     #Travel Agencies
-    decolar = ag.Agency(companyList,'Decolar.Com')
-    skyScanner = ag.Agency(companyList, 'Sky Scanner')
+    decolar = Agency(companyList,'Decolar.Com')
+    skyScanner = Agency(companyList, 'Sky Scanner')
 
     agencyList = [decolar,skyScanner]
 
@@ -40,4 +40,4 @@ if __name__ == "__main__":
     # Creating Clients
     for i in range(10):
         clientList.append( Client(agencyList))
-        threadList.append(th.Thread(target=clientList[i].run).start())
+        threadList.append(Thread(target=clientList[i].run).start())

@@ -1,6 +1,7 @@
-from company import Company
 from threading import RLock, Thread
 from time import sleep
+
+from company import Company
 
 class Agency(object):
 

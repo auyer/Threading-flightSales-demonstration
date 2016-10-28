@@ -1,7 +1,9 @@
-from agency import Agency
-from time import sleep
 from random import randrange
 from threading import currentThread
+from time import sleep
+
+from agency import Agency
+
 
 class Client(object):
 
