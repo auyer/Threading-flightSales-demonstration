@@ -1,6 +1,6 @@
 # TravelAgencies: a threading and Mutex Demonstration for Education with Python
 
-An educational Python demonstration of threading and Mutex usage in a ticket selling model.
+An **educational** Python demonstration of threading and Mutex usage in a ticket selling model.
 
 
 #The problem
@@ -13,7 +13,7 @@ This system simulates sales of Airplane Tickets. In this simulation, there are:
 ### Flight Company
 Each flight company has:
 - 5 seats per plane
-- a total per flight cost of 1000.00 'coins'  
+- a total per flight cost of 1000.00 'coins'
 - a crazy manager that increases the price of the ticket in 10% incerements for each ticket sold.
 - the company has to make sure not to sell the same ticket to two different agencies
 
