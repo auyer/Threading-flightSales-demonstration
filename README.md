@@ -1,4 +1,4 @@
-# TravelAgencies: a threading and Mutex Demonstration for Education with Python
+# TravelAgencies: a threading and Mutex Demo for Education with Python 3
 
 An educational Python demonstration of threading and Mutex usage in a ticket selling model.
 
