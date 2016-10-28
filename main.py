@@ -32,7 +32,7 @@ if __name__ == "__main__":
     decolar.run()
 
 
-    sleep(2)
+    sleep(10)
     '''
     print('cliente busao')
     for seat in busao.getList():
