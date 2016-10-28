@@ -13,7 +13,7 @@ This system simulates sales of Airplane Tickets. In this simulation, there are:
 ### Flight Company
 Each flight company has:
 - 5 seats per plane
-- a total dispenses of 1000.00 'coins'   # It's not clear to me what this means - is it 'total budget'? Hafgan
+- a total per flight cost of 1000.00 'coins'  
 - a crazy manager that increases the price of the ticket in 10% incerements for each ticket sold.
 - the company has to make sure not to sell the same ticket to two different agencies
 
