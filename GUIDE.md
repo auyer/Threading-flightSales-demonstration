@@ -3,6 +3,8 @@
 - to do
 
 ## Concepts used:
-        - Object Oriented Programming : classes, methods 
-        - Paralel Processing : Multithreading
-        - Acces controll for paralel Processing : Mutex (mutual exclusion)
+        - Lists, exception handling, modules
+        - Object Oriented Programming : classes, methods, functions, objects, instances 
+                -Encapsulation, data abstraction, polymorphism, inheritance
+        - Parallel Processing : multithreading, threading vs. multiprocessing modules
+        - Access Control for Parallel Processing : Mutex (mutual exclusion), queue, GIL (Global Interpreter Lock)
