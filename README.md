@@ -4,6 +4,12 @@ An **educational** Python demonstration of threading and Mutex usage in a ticket
 
 #### Read the problem below and [Click Here](GUIDE.md) to read the [GUIDE.md](GUIDE.md) explaining all the concepts behind this system (Under Construction)
 
+###How to Run:
+
+Inside the sourceFiles folder, run the command:
+
+``` python3 main.py ``` 
+
 #The problem
 
 This system simulates sales of Airplane Tickets. In this simulation, there are:
@@ -26,11 +32,11 @@ Each agency has to:
 ### Client
 Every client follow these rules:
 - He will buy only one ticket
-- He will always buy the cheapest flight available. 
+- He will always buy the cheapest flight available.
 
 
 #The Model ( ER and UML )
-(the ER also presents some unimplemented features described below ["Next Features"](https://github.com/auyer/TravelAgencies___a_threading-Mutex_Demonstration#next-features-) ) 
+(the ER also presents some unimplemented features described below ["Next Features"](https://github.com/auyer/TravelAgencies___a_threading-Mutex_Demonstration#next-features-) )
 
 ![ModelScreenShot](https://github.com/auyer/Threading-flightSales-demonstration/blob/master/models.draw_io/ModelScreenShot.png?raw=true "Model ScreenShot")
 
@@ -39,7 +45,7 @@ Every client follow these rules:
 
 ##Companies
 
-- Every week, tickets will be restored 
+- Every week, tickets will be restored
 - Companies will make sales if the minimumRevenue hasn't been reached, and the week will end in two days. (Price will aim at reaching the minimumRevenue)
 - Companies that had a Loss in the past week will make sales aiming to cover the loss.
 - After Hitting the minimum revenue, companies will increase the price.
@@ -47,4 +53,4 @@ Every client follow these rules:
 ##Clients
 
 - Create 3 types of clients: High, Mid and Low. The high class will buy whenever they decide to. The Mid will wait for the sales in the end of the week, but if they can't find any, they will travel anyways on the next week. The Low will only buy in the Sales.
-- Clients that traveled this week won't travel in the next one. 
+- Clients that traveled this week won't travel in the next one.
